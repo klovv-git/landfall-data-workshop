@@ -47,6 +47,27 @@ this example uses wind speed, not wind direction.
 - Type: weather-model forecast values, not direct local sensor readings.
 - Data licence: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
+#### Explore the data source yourself
+
+Open the [Open-Meteo weather API configuration page](https://open-meteo.com/en/docs).
+
+This page lets you choose a location, weather variables, units,
+and a forecast period, then generates a URL for requesting the data.
+
+To recreate our request, select:
+
+- Latitude: `52.7236`
+- Longitude: `6.1552`
+- Hourly variable: **Wind Speed (10 m)**
+- Wind-speed unit: **km/h**
+- Forecast days: **1**
+- Timezone: **Europe/Amsterdam**
+
+Deselect any other hourly variables if you only want wind speed.
+
+The configuration page helps you build the request.
+The direct API link below returns the actual data.
+
 #### The exact data request
 
 We retrieved the data using this URL:
