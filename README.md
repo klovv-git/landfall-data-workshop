@@ -20,8 +20,8 @@ Ask → Find → Inspect → Prepare → Translate → Test → Share
 
 ## Start here: a drawing driven by wind
 
-Our first example uses hourly wind-speed values for Amsterdam
-to control moving lines in p5.js.
+Our first example uses hourly wind-speed values for Kolderveen,
+a village in Drenthe, Netherlands, to control moving lines in p5.js.
 
 1. Open `examples/wind-drawing/sketch.js` in this repository.
 2. Copy the code.
@@ -37,12 +37,13 @@ this example uses wind speed, not wind direction.
 
 ### About the data
 
-- Provider: Open-Meteo.
-- Location requested: Amsterdam — latitude 52.37, longitude 4.90.
+- Provider: [Open-Meteo](https://open-meteo.com/).
+- Location requested: Kolderveen, Drenthe, Netherlands.
+- Requested coordinates: latitude 52.7236, longitude 6.1552.
 - Date represented in the saved example: 24 October 2026.
 - Variable: hourly wind speed at 10 metres above ground.
 - Units: kilometres per hour.
-- Timezone: Europe/Amsterdam.
+- Timezone: Europe/Amsterdam, which also applies to Kolderveen.
 - Type: weather-model forecast values, not direct local sensor readings.
 - Data licence: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
@@ -50,7 +51,7 @@ this example uses wind speed, not wind direction.
 
 We retrieved the data using this URL:
 
-https://api.open-meteo.com/v1/forecast?latitude=52.37&longitude=4.90&hourly=wind_speed_10m&forecast_days=1&timezone=Europe%2FAmsterdam&wind_speed_unit=kmh
+https://api.open-meteo.com/v1/forecast?latitude=52.7236&longitude=6.1552&hourly=wind_speed_10m&forecast_days=1&timezone=Europe%2FAmsterdam&wind_speed_unit=kmh
 
 Open it in your browser to see the response as JSON.
 
@@ -58,12 +59,15 @@ Here is what each part requests:
 
 | Parameter | Meaning |
 |---|---|
-| `latitude=52.37` | Latitude of the requested location |
-| `longitude=4.90` | Longitude of the requested location |
+| `latitude=52.7236` | Latitude of the requested location |
+| `longitude=6.1552` | Longitude of the requested location |
 | `hourly=wind_speed_10m` | Hourly wind speed at 10 metres above ground |
 | `forecast_days=1` | One day of forecast data |
-| `timezone=Europe%2FAmsterdam` | Amsterdam local time; `%2F` encodes `/` |
+| `timezone=Europe%2FAmsterdam` | Local time in the Netherlands; `%2F` encodes `/` |
 | `wind_speed_unit=kmh` | Wind speed in kilometres per hour |
+
+The service returns data for a nearby weather-model grid point.
+Its returned coordinates may differ slightly from those requested.
 
 #### Finding the values
 
@@ -76,14 +80,23 @@ Inside the response:
 The first timestamp matches the first wind value, the second
 timestamp matches the second value, and so on.
 
-We copied the wind-speed values into the `wind` array in `sketch.js`.
+We copied the 24 wind-speed values into the `wind` array in
+`examples/wind-drawing/sketch.js`.
 
-**Important:** this URL requests the current day's forecast.
-Opening it on another day will return different data.
-The sketch uses a saved snapshot retrieved for 24 October 2026;
-it does not automatically update.
+#### Saved data versus current data
+
+The sketch contains a saved snapshot for 24 October 2026.
+It does not automatically retrieve new data.
+
+The request URL asks for the current day's forecast.
+Opening it later can return updated values or a different date.
+It is not a permanent link to the exact snapshot used in the sketch.
+
+The movement direction in the drawing is an artistic choice.
+Only wind speed—not wind direction—controls this example.
 
 API documentation: https://open-meteo.com/en/docs
+
 
 ## Try changing something
 
